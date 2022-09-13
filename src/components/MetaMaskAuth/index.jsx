@@ -63,7 +63,7 @@ async function connect(onConnected, setsignStatus, setUserBalance) {
     Ya quedo esto!!!
 
     Welcome to MyLogin!
-    
+
     Signing is the only way we can truly know 
     that you are the owner of the wallet you 
     are connecting. Signing is a safe, gas-less 
@@ -152,24 +152,28 @@ const MetaMaskAuth = ({ sign, msg, address, signature }) => {
   useEffect(() => {
     checkIfWalletIsConnected(setUserAddress, setsignStatus, setUserBalance);
   }, []);
-  const getbalance = (address) => {
-    // Requesting balance method
-    window.ethereum
-      .request({
-        method: "eth_getBalance",
-        params: [address, "latest"],
-      })
-      .then((balance) => {
-        console.log(ethers.utils.formatEther(balance));
-        console.log(ethers.utils);
-        // Setting balance
-        //setdata({
-        // address: address,
-        // Balance: ethers.utils.formatEther(balance),
-        //});
-      });
-  };
-  getbalance(userAddress);
+  try {
+    const getbalance = (address) => {
+      // Requesting balance method
+      window.ethereum
+        .request({
+          method: "eth_getBalance",
+          params: [address, "latest"],
+        })
+        .then((balance) => {
+          console.log(ethers.utils.formatEther(balance));
+          console.log(ethers.utils);
+          // Setting balance
+          //setdata({
+          // address: address,
+          // Balance: ethers.utils.formatEther(balance),
+          //});
+        });
+    };
+    getbalance(userAddress);
+  } catch (error) {
+    
+  }
 
   console.log("Main method " + userAddress);
   console.log("Main method " + signStatus);
