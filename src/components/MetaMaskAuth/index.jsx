@@ -59,7 +59,19 @@ async function connect(onConnected, setsignStatus, setUserBalance) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    const signature = await signer.signMessage("Firmame esta " + address);
+    const signature = await signer.signMessage(`
+    Ya quedo esto!!!
+
+    Welcome to MyLogin!
+    
+    Signing is the only way we can truly know 
+    that you are the owner of the wallet you 
+    are connecting. Signing is a safe, gas-less 
+    transaction that does not in any way give 
+    MyLogin permission to perform any 
+    transactions with your wallet. \n
+    Your address is \n
+    ` + address);
     console.log("firma" + signature);
     console.log("Vamo a almacenar la firma");
     try {
